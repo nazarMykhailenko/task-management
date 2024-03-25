@@ -1,0 +1,33 @@
+.listItem {
+	position: relative;
+	padding: 24px 20px;
+}
+
+.link {
+	color: #aab3c7;
+	font-size: 1.5rem;
+	line-height: 2rem;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0;
+		width: 3px;
+		border-radius: 0px 5px 5px 0px;
+		height: 50%;
+		background-color: #365eff;
+		visibility: hidden;
+		z-index: -1000;
+	}
+}
+
+.active {
+	color: #365eff;
+
+	&::before {
+		z-index: 1;
+		visibility: visible;
+	}
+}

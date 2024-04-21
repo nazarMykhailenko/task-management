@@ -92,7 +92,11 @@ export const userSlice = createSlice({
 			state.status = Loading.LOADING
 		},
 		updateUser(state, action: PayloadAction<IUser>) {
-			state.user = action.payload
+			const newUser = action.payload
+
+			if (newUser.user_name) {
+				state.user = action.payload
+			}
 		},
 	},
 	extraReducers: (builder) => {

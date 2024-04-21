@@ -14,6 +14,7 @@ import { LogInPage } from './pages/LogInPage'
 import { SignUpPage } from './pages/SignUpPage'
 import { VerifyEmailPage } from './pages/VerifyEmailPage'
 import { WaitingToVerifyPage } from './pages/WaitingToVerifyPage'
+import { SettingsPage } from './pages/SettingsPage'
 
 export const App: React.FC = () => {
 	return (
@@ -31,6 +32,7 @@ export const App: React.FC = () => {
 			<Route path='/sign-up' element={<SignUpPage />} />
 			<Route path='/verify-email/:emailToken' element={<VerifyEmailPage />} />
 			<Route path='/waiting-to-verify' element={<WaitingToVerifyPage />} />
+			<Route path='/settings' element={<SettingsPage />} />
 		</Routes>
 	)
 }

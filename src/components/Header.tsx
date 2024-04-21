@@ -3,7 +3,7 @@ import { useAppSelector } from '../redux/store'
 import { AiOutlineSearch, AiOutlineSetting } from 'react-icons/ai'
 import { IoIosNotificationsOutline } from 'react-icons/io'
 import { Button } from './common/Button'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const Header: React.FC = () => {
 	const navigate = useNavigate()
@@ -44,9 +44,12 @@ export const Header: React.FC = () => {
 
 			{user ? (
 				<div className='flex items-center gap-5'>
-					<div className='text-2xl text-[#acacac] cursor-pointer'>
+					<Link
+						to='/settings'
+						className='text-2xl text-[#acacac] cursor-pointer'
+					>
 						<AiOutlineSetting />
-					</div>
+					</Link>
 
 					<div className='text-2xl text-[#acacac] cursor-pointer relative'>
 						<IoIosNotificationsOutline />

@@ -1,8 +1,13 @@
 import React from 'react'
+import { useAppSelector } from '../redux/store'
 import { AiOutlineSearch, AiOutlineSetting } from 'react-icons/ai'
 import { IoIosNotificationsOutline } from 'react-icons/io'
+import { Button } from './common/Button'
+import { useNavigate } from 'react-router-dom'
 
 export const Header: React.FC = () => {
+	const navigate = useNavigate()
+	const { user } = useAppSelector((state) => state.user)
 	const inputRef = React.useRef<HTMLInputElement>(null)
 	const [value, setValue] = React.useState('')
 
@@ -37,30 +42,42 @@ export const Header: React.FC = () => {
 				</div>
 			</div>
 
-			<div className='flex items-center gap-5'>
-				<div className='text-2xl text-[#acacac] cursor-pointer'>
-					<AiOutlineSetting />
-				</div>
+			{user ? (
+				<div className='flex items-center gap-5'>
+					<div className='text-2xl text-[#acacac] cursor-pointer'>
+						<AiOutlineSetting />
+					</div>
 
-				<div className='text-2xl text-[#acacac] cursor-pointer relative'>
-					<IoIosNotificationsOutline />
-					<span className='absolute top-0 right-0 block w-2.5 h-2.5 bg-red-500 rounded-full'></span>
-				</div>
+					<div className='text-2xl text-[#acacac] cursor-pointer relative'>
+						<IoIosNotificationsOutline />
+						<span className='absolute top-0 right-0 block w-2.5 h-2.5 bg-red-500 rounded-full'></span>
+					</div>
 
-				<div>
-					<div className='flex items-center gap-2'>
-						<div className='h-10 w-10 rounded-full overflow-hidden cursor-pointer'>
-							<img
-								className='object-cover object-center'
-								src='../../public/assets/img/dhaya-eddine-bentaleb-6ZLrCWI3Ink-unsplash.jpg'
-								alt='profile pic'
-							/>
+					<div>
+						<div className='flex items-center'>
+							{user.user_image ? (
+								<div className='h-10 w-10 rounded-full overflow-hidden cursor-pointer mr-2'>
+									<img
+										className='object-cover object-center'
+										src={user.user_image}
+										alt='profile pic'
+									/>
+								</div>
+							) : (
+								''
+							)}
+
+							<div className='cursor-pointer'>{user.user_name}</div>
 						</div>
-
-						<div>Allison Hoper</div>
 					</div>
 				</div>
-			</div>
+			) : (
+				<div>
+					<Button filled onClick={() => navigate('/log-in')}>
+						Log In
+					</Button>
+				</div>
+			)}
 		</div>
 	)
 }

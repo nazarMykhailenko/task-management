@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 
 interface IProjectItem {
 	name: string
-	icon: IconType
 	id: number
 }
 
@@ -67,16 +66,12 @@ const Popup: React.FC<{
 	)
 }
 
-export const ProjectItem: React.FC<IProjectItem> = ({ name, icon, id }) => {
-	const IconComponent = icon as React.FC<IconBaseProps>
+export const ProjectItem: React.FC<IProjectItem> = ({ name, id }) => {
 	const navLinkStyles =
 		'flex flex-row items-center p-2 gap-2 w-full h-full border-2 border-[#f0f1f4] rounded-md'
 	const navLinkActiveStyles = 'bg-[#365eff] !border-[#365eff] !text-[#f0f1f4]'
 	const isActive = (pathname: string, to: string) => pathname == to
 	const [isOpen, setOpen] = React.useState(false)
-
-	console.log(isOpen)
-
 	return (
 		<div className='flex flex-row items-center justify-between gap-5 relative'>
 			<CustomNavLink
@@ -86,7 +81,6 @@ export const ProjectItem: React.FC<IProjectItem> = ({ name, icon, id }) => {
 				activeStyles={navLinkActiveStyles}
 			>
 				<>
-					<div>{React.createElement(IconComponent)}</div>
 					<div className='text-[13px] font-medium'>{name}</div>
 					<div
 						onClick={(e: React.MouseEvent<HTMLDivElement>) => {

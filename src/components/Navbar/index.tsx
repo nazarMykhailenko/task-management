@@ -10,18 +10,13 @@ import {
 	PiCalendarBlankDuotone,
 	PiChatCircleDots,
 } from 'react-icons/pi'
-import { FaUserTie, FaRegBuilding } from 'react-icons/fa'
+import { FaUserTie } from 'react-icons/fa'
 // import { BsGraphUpArrow, BsGraphDownArrow } from 'react-icons/bs'
 import { BsGraphUpArrow } from 'react-icons/bs'
 import { CiLogout } from 'react-icons/ci'
+import { useAppDispatch, useAppSelector } from '../../redux/store'
+import { getProjects } from '../../redux/projects/slice'
 import classes from './styles.module.scss'
-
-const projects = [
-	{ name: 'Piper Enterprise', icon: FaRegBuilding, id: 1 },
-	{ name: 'Web Platform', icon: FaRegBuilding, id: 2 },
-	{ name: 'Mobile Loop', icon: FaRegBuilding, id: 3 },
-	{ name: 'Wiro Mobile App', icon: FaRegBuilding, id: 4 },
-]
 
 const teamMembers = [
 	{
@@ -59,7 +54,13 @@ const teamMembers = [
 ]
 
 export const Navbar: React.FC = () => {
+	const dispatch = useAppDispatch()
+	const { projects } = useAppSelector((state) => state.projects)
 	const location = useLocation()
+
+	React.useEffect(() => {
+		dispatch(getProjects())
+	}, [])
 
 	const isActiveNavItem = (pathname: string, to: string) => {
 		if (to !== '/') {
@@ -136,8 +137,12 @@ export const Navbar: React.FC = () => {
 					<div className='mb-8'>
 						<h5 className='mb-4'>Projects</h5>
 						<div className='[&>*:not(:last-child)]:mb-3'>
-							{projects.map(({ name, icon, id }) => (
-								<ProjectItem key={id} name={name} icon={icon} id={id} />
+							{projects.map(({ project_id, project_name }) => (
+								<ProjectItem
+									key={project_id}
+									id={project_id}
+									name={project_name}
+								/>
 							))}
 						</div>
 					</div>
@@ -176,7 +181,9 @@ export const Navbar: React.FC = () => {
 						</div>
 					</div>
 
-					<Button>+ Add Project</Button>
+					<Button border dashed>
+						+ Add Project
+					</Button>
 				</div>
 			)}
 		</div>

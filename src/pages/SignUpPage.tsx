@@ -107,7 +107,12 @@ export const SignUpPage: React.FC = () => {
 						})}
 					/>
 					{errors.password && (
-						<span className='text-red-500'>{errors.password.message}</span>
+						<div className='text-red-500'>{errors.password.message}</div>
+					)}
+					{status === Loading.ERROR && (
+						<div className='text-red-500'>
+							Failed to sign up, please try again
+						</div>
 					)}
 				</div>
 

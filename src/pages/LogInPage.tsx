@@ -79,7 +79,10 @@ export const LogInPage: React.FC = () => {
 						})}
 					/>
 					{errors.password && (
-						<span className='text-red-500'>{errors.password.message}</span>
+						<div className='text-red-500'>{errors.password.message}</div>
+					)}
+					{status === Loading.ERROR && (
+						<div className='text-red-500'>Incorrect login details</div>
 					)}
 				</div>
 

@@ -8,7 +8,7 @@ interface IButton {
 	solid?: boolean
 	border?: boolean
 	otherStyles?: string
-	onClick?: () => void
+	onClick?: (...args: any[]) => void
 }
 
 export const Button: React.FC<IButton> = ({

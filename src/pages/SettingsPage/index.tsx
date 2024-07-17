@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useAppSelector, useAppDispatch } from '../../redux/store'
 import { fetchUpdatedUser } from '../../redux/user/slice'
@@ -10,6 +11,8 @@ import { ISettingsPageInput } from './types'
 import { IUser } from '../../redux/user/types'
 
 export const SettingsPage: React.FC = () => {
+	const navigate = useNavigate()
+
 	const { user } = useAppSelector((state) => state.user)
 	const {
 		register,
@@ -50,8 +53,14 @@ export const SettingsPage: React.FC = () => {
 		)
 
 	return (
-		<div className='flex items-center justify-center h-screen'>
+		<div className='flex items-center justify-center h-screen w-screen relative'>
 			<form className='w-full max-w-sm' onSubmit={handleSubmit(onSubmit)}>
+				<div
+					onClick={() => navigate('/')}
+					className='absolute text-red-600 top-10 right-10 text-2xl cursor-pointer'
+				>
+					X
+				</div>
 				<h1 className='text-center text-3xl font-bold mb-10'>Settings</h1>
 
 				{/* <div className='mb-8'>
@@ -81,7 +90,7 @@ export const SettingsPage: React.FC = () => {
 					errors={errors}
 				/>
 
-				<Button big filled>
+				<Button onClick={() => navigate('/')} big filled>
 					Save Changes
 				</Button>
 			</form>

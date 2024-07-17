@@ -38,7 +38,7 @@ const Popup: React.FC<{
 	}, [])
 
 	return (
-		<div className='popup absolute bg-white p-3 rounded-lg shadow-md top-2 -right-3 z-20'>
+		<div className='popup absolute bg-white p-3 rounded-lg shadow-lg top-2 -right-3 z-20'>
 			<div className='flex items-center justify-between'>
 				<h2 className='text-sm font-semibold mb-2'>Options</h2>
 				<h2
@@ -50,13 +50,19 @@ const Popup: React.FC<{
 			</div>
 			<div className='grid grid-cols-1 gap-4'>
 				<button
-					onClick={() => navigate(`/project/${id}`)}
+					onClick={() => {
+						navigate(`/project/${id}`)
+						setOpen((prev) => !prev)
+					}}
 					className='bg-blue-500 text-white px-3 py-1 text-sm rounded-md hover:bg-blue-600'
 				>
 					Open Project
 				</button>
 				<button
-					onClick={() => deleteProject}
+					onClick={() => {
+						deleteProject()
+						setOpen((prev) => !prev)
+					}}
 					className='bg-red-500 text-white px-3 py-1 text-sm rounded-md hover:bg-red-600'
 				>
 					Delete Project
